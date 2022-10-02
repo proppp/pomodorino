@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Dependencies: mpg123
+
+arg1=$1
+shift
+args="$*"
+
+min=${arg1:?Example: pomodorino 15 Take a break}
+sec=$((min * 60))
+notify-send -u critical -t 3500 -a pomodorino "🍅 Started a pomodoro. Focus for ${min:?} minutes!"
+date '+%H:%M' && sleep "${sec:?}" && notify-send -u critical -t 5000 -a pomodorino "🍅 Your Pomodoro is over, Take a break!" && mpg123 "${XDG_CONFIG_HOME:-$HOME/.config}/ding.mp3" > /dev/null
